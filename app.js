@@ -3,15 +3,15 @@
  * Module dependencies.
  */
 
-var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
-var index = require('./routes/index');
-var http = require('http');
-var path = require('path');
-var MongoStore = require('connect-mongo')(express);
-var settings = require('./settings');
-var flash = require('connect-flash');
+var express = require('express'),
+	routes = require('./routes'),
+	user = require('./routes/user'),
+	index = require('./routes/index'),
+	http = require('http'),
+	path = require('path'),
+	MongoStore = require('connect-mongo')(express),
+	settings = require('./settings'),
+	flash = require('connect-flash');
 
 var app = express();
 
@@ -43,10 +43,10 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', index.showname);
-app.get('/test', index.showPostName);
 
 app.get('/login', index.showLogin);
 app.post('/reg', index.doReg);
+app.get('/reg', index.showReg);
 
 
 
