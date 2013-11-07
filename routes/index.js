@@ -15,13 +15,18 @@ IndexPage.showname = function(req,res){
 }
 
 IndexPage.showLogin = function(req,res){
-	res.render('login',{title:'Login',user:req.session.user});
+	console.log(req.session.user);
+	res.render('login',{title:'Login',user:req.session.user,error:''});
 }
 
 IndexPage.showReg = function(req,res){	
-	res.render('reg',{title:'Register',user:req.session.user});
+	res.render('reg',{title:'Register',user:req.session.user,error:''});
 }
 
+IndexPage.doLogout = function(req,res){	
+	req.session.user = null;
+	return res.redirect('/');
+}
 
 IndexPage.doLogin = function(req,res){
 	var username = req.body.username,

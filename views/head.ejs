@@ -20,12 +20,13 @@
       <a class="brand" href="#">Project name</a>
       <div class="nav-collapse collapse">
         <ul class="nav">
-          <li class="active"><a href="/">Home</a></li>
+          <li><a href="/">Home</a></li>
           <% if(user) { %>
+          <li class="active"><a>Hello,<%=user%></a></li>
+          <li><a href="/logout">Logout</a></li>
+          <%}else{ %>
           <li><a href="/login">login</a></li>
           <li><a href="/reg">register</a></li>
-          <%}else{ %>
-          <li><%=user%></li>
           <%} %>
         </ul>
       </div><!--/.nav-collapse -->
