@@ -15,16 +15,15 @@ IndexPage.showname = function(req,res){
 }
 
 IndexPage.showLogin = function(req,res){
-	res.render('index',{title:'Login',user:req.session.user});
+	res.render('login',{title:'Login',user:req.session.user});
 }
 
 IndexPage.showReg = function(req,res){	
-	res.render('index',{title:'Register',user:req.session.user});
+	res.render('reg',{title:'Register',user:req.session.user});
 }
 
 
 IndexPage.doLogin = function(req,res){
-	res.render('index',{title:'Blog'});
 	var username = req.body.username,
 		password = req.body.password;
 
