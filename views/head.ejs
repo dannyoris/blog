@@ -21,8 +21,12 @@
       <div class="nav-collapse collapse">
         <ul class="nav">
           <li class="active"><a href="/">Home</a></li>
+          <% if(user) { %>
           <li><a href="/login">login</a></li>
           <li><a href="/reg">register</a></li>
+          <%}else{ %>
+          <li><%=user%></li>
+          <%} %>
         </ul>
       </div><!--/.nav-collapse -->
     </div>

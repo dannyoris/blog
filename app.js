@@ -45,6 +45,7 @@ if ('development' == app.get('env')) {
 app.get('/', index.showname);
 
 app.get('/login', index.showLogin);
+app.post('/login', index.doLogin);
 app.post('/reg', index.doReg);
 app.get('/reg', index.showReg);
 
