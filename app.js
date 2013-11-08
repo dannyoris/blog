@@ -13,7 +13,7 @@ var express = require('express'),
 	settings = require('./settings'),
 	flash = require('connect-flash');
 
-var app = express();
+var app = express(),server;
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -42,7 +42,9 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+//routes
 app.get('/', index.showname);
+app.get('/test', index.showtest);
 app.get('/logout', index.doLogout);
 app.get('/login', index.showLogin);
 app.post('/login', index.doLogin);
@@ -50,14 +52,19 @@ app.post('/reg', index.doReg);
 app.get('/reg', index.showReg);
 
 
-
-
-
-
-
-
-
-
-http.createServer(app).listen(app.get('port'), function(){
+server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
+});
+
+
+//socket
+var io = require('socket.io').listen(server);
+io.sockets.on('connection', function(socket){
+    console.log("Connection " + socket.id + " accepted.");
+    socket.on('message', function(message){
+        console.log("Received message: " + message + " - from client " + socket.id);
+    });
+    socket.on('disconnect', function(){
+        console.log("Connection " + socket.id + " terminated.");
+    });
 });

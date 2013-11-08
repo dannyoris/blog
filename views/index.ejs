@@ -1,6 +1,38 @@
 <%- include head %>
+<script src="/socket.io/socket.io.js"></script>
 <div class="container">
-  <h1>Hello world!</h1>
+<h1></h1>
+<script>
+var socket;
+var firstconnect = true;
+ 
+function connect() {
+    if(firstconnect) {
+        socket = io.connect(null); 
+        socket.on('message', function(data){ message(data); });
+        firstconnect = false;
+    } else {
+        socket.socket.reconnect();
+    }
+}
+ 
+ 
+function message(data) {
+    document.getElementById('message').innerHTML = "Server says: " + data;
+}
+ 
+function send() {
+    socket.send("Hello Server!");
+}
+
+connect();
+</script>
+
+<div><p id="status">Waiting for input</p></div>
+<div><p id="message"></p></div>
+<button id="connect" onClick='connect()'/>Connect</button>
+<button id="disconnect" onClick='disconnect()'>Disconnect</button>
+<button id="send" onClick='send()'/>Send Message</button>
 </div>
 
 

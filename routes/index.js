@@ -14,6 +14,10 @@ IndexPage.showname = function(req,res){
 	res.render('index',{title:'Blog',user:req.session.user});
 }
 
+IndexPage.showtest = function(req,res){
+	res.render('index',{title:'Blog',user:req.session.user});
+}
+
 IndexPage.showLogin = function(req,res){
 	console.log(req.session.user);
 	res.render('login',{title:'Login',user:req.session.user,error:''});
