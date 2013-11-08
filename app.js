@@ -7,6 +7,7 @@ var express = require('express'),
 	routes = require('./routes'),
 	user = require('./routes/user'),
 	index = require('./routes/index'),
+  socket = require('./common/socket'),
 	http = require('http'),
 	path = require('path'),
 	MongoStore = require('connect-mongo')(express),
@@ -44,27 +45,16 @@ if ('development' == app.get('env')) {
 
 //routes
 app.get('/', index.showname);
-app.get('/test', index.showtest);
-app.get('/logout', index.doLogout);
 app.get('/login', index.showLogin);
-app.post('/login', index.doLogin);
-app.post('/reg', index.doReg);
 app.get('/reg', index.showReg);
+
+app.get('/logout', user.doLogout);
+app.post('/login', user.doLogin);
+app.post('/reg', user.doReg);
 
 
 server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-
-//socket
-var io = require('socket.io').listen(server);
-io.sockets.on('connection', function(socket){
-    console.log("Connection " + socket.id + " accepted.");
-    socket.on('message', function(message){
-        console.log("Received message: " + message + " - from client " + socket.id);
-    });
-    socket.on('disconnect', function(){
-        console.log("Connection " + socket.id + " terminated.");
-    });
-});
+socket.start(server);
