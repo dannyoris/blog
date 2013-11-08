@@ -18,9 +18,12 @@ User.doLogin = function(req,res){
 	userModel.get({
 		username:username,
 		password:tool.md5(password)
-	},function(err,user){
+	},function(err,data){
 		if(err){
-			//return res.render('login',{title:'',error:'账号或者密码错'});
+			return res.render('login',{title:'',error:'账号或者密码错'});
+		}
+		if(data==undefined){
+			return res.render('login',{title:'',error:'账号或者密码错'});
 		}
 		req.session.user = username;
 		return res.redirect('/');
