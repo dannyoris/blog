@@ -2,9 +2,30 @@
 <script src="/socket.io/socket.io.js"></script>
 <div class="container">
 <h1></h1>
+<div class="span3">
+<fieldset>
+<label>内容：</label>
+<p><textarea width="500" height="200" id="Content"></textarea></p>
+<a class="btn btn-primary" onClick="send()">Send</a>
+<span>当前登录用户：</span>
+<span id="nowuser"></span>
+</fieldset>
+</div>
+
+<div class="span3">
+    <ul class="unstyled" id="message">
+
+    </ul>
+</div>
+
+</div>
 <script>
 var socket;
 var firstconnect = true;
+var date = new Date();
+var user = "<%=user%>";
+
+document.getElementById('nowuser').innerHTML = user;
  
 function connect() {
     if(firstconnect) {
@@ -18,22 +39,19 @@ function connect() {
  
  
 function message(data) {
-    document.getElementById('message').innerHTML = "Server says: " + data;
+    var _old = document.getElementById('message').innerHTML;
+    document.getElementById('message').innerHTML =_old + data;
 }
  
 function send() {
-    socket.send("Hello Server!");
+    var val = document.getElementById('Content').value;
+    var _send = "<li>" + user + " says: " + val +"</li>";
+    message(_send);
+    socket.send(_send);
 }
 
 connect();
 </script>
-
-<div><p id="status">Waiting for input</p></div>
-<div><p id="message"></p></div>
-<button id="connect" onClick='connect()'/>Connect</button>
-<button id="disconnect" onClick='disconnect()'>Disconnect</button>
-<button id="send" onClick='send()'/>Send Message</button>
-</div>
 
 
 <%- include foot %>
