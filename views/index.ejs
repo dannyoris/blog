@@ -45,7 +45,10 @@ function message(data) {
  
 function send() {
     var val = document.getElementById('Content').value;
-    var _send = "<li>" + user + " says: " + val +"</li>";
+    var _send = {
+        username:user,
+        message:val
+    }
     message(_send);
     socket.send(_send);
 }
