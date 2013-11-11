@@ -10,6 +10,7 @@ var time = {
 }
 
 function Chat(info){
+	console.log(info);
 	this.username = info.username;
 	this.message = info.message;
 }
