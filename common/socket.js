@@ -5,14 +5,18 @@ var chat = require('../models/chat.js');
 socket.start = function(server){
 	socketio.listen(server).on('connection', function (socket) {
 	    socket.on('message', function (msg) {
-	    	//var _cc = eval(msg);
-	    	console.log(JSON.parse(msg));
-	    	/*var newChat = new chat(_cc);
-	    	newChat.save(function(res){
-	    		if(res==null){
-	    			socket.broadcast.emit('message', msg);
+	    	var _cc = msg.split('$-$-$'),
+	    		_send = {
+	    			username:_cc[0],message:_cc[1]
+	    		};
+	    	var newChat = new chat(_send);
+	    	newChat.save(function(res,time){
+	    		if(time){
+	    			_send.time = time;
+	    			socket.broadcast.emit('message', _send);
+	    			socket.emit('message', _send);
 	    		}
-	    	});*/
+	    	});
 	        
 	    });
 	});

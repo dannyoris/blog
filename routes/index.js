@@ -1,4 +1,5 @@
 
+var chat = require('../models/chat.js');
 /*
  * GET home page.
  */
@@ -8,11 +9,12 @@ IndexPage.showname = function(req,res){
 	if(req.session.user==null){
 		return res.redirect('/login');
 	}
-	res.render('index',{title:'Blog',user:req.session.user});
+	chat.get({},function(err,data){
+		res.render('index',{title:'Blog',user:req.session.user,chatdata:data});
+	});
 }
 
 IndexPage.showLogin = function(req,res){
-	console.log(req.session.user);
 	res.render('login',{title:'Login',user:req.session.user,error:''});
 }
 

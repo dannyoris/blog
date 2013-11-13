@@ -39,14 +39,18 @@ function connect() {
  
  
 function message(data) {
-    var _old = document.getElementById('message').innerHTML;
-    document.getElementById('message').innerHTML =_old + data;
+    var _old = document.getElementById('message').innerHTML;    
+    document.getElementById('message').innerHTML = '<li>'+data.username+' says:'+data.message+' at('+data.time+')</li>' + _old;
 }
  
 function send() {
     var val = document.getElementById('Content').value;
-    var _send = '{username:'+user+',message:'+val+'}';
-    socket.send(_send);
+    socket.send(user+"$-$-$"+val);
+}
+
+
+function getOld(){
+    var data = eval(<%=chatdata%>);
 }
 
 connect();

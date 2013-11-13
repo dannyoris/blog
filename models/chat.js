@@ -1,16 +1,7 @@
 var mongodb = require('./db');
-var date = new Date();
-var time = {
-  date: date,
-  year : date.getFullYear(),
-  month : date.getFullYear() + "-" + (date.getMonth()+1),
-  day : date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate(),
-  minute : date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes(),
-  second : date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
-}
+var tool = require('../common/tool.js');
 
 function Chat(info){
-	console.log(info);
 	this.username = info.username;
 	this.message = info.message;
 }
@@ -21,7 +12,7 @@ Chat.prototype.save = function(callback){
 	var info = {
 		username:this.username,
 		message:this.message,
-		time:time
+		time:tool.getTime()
 	}
 
 	mongodb.open(function(err,db){
@@ -34,9 +25,9 @@ Chat.prototype.save = function(callback){
 				return callback(err);
 			}
 
-			collection.insert(info,{safe:true},function(err,info){
+			collection.insert(info,{safe:true},function(err){
 				mongodb.close();
-				callback(null);
+				callback(null,info.time.second);
 			});
 
 		});
@@ -55,10 +46,15 @@ Chat.get = function(key,callback){
 				return callback(err);
 			}
 
-			collection.find(key,{safe:true},function(err,data){
-				mongodb.close();
-				callback(null);
-			});
+			collection.find(key)
+						.sort({time:-1})
+					    .toArray(function(err,data){
+							mongodb.close();
+							if(err){
+								callback(err);
+							}		
+							callback(err,data);		   	
+					    });
 
 		});
 	});
