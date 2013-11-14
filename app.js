@@ -46,12 +46,13 @@ if ('development' == app.get('env')) {
 
 //routes
 app.get('/', index.showname);
-app.get('/login', index.showLogin);
 app.post('/login', user.doLogin);
-/*app.get('/reg', index.showReg);
-
+app.get('/login', index.showLogin);
 app.get('/logout', user.doLogout);
-app.post('/reg', user.doReg);*/
+app.get('/reg', index.showReg);
+
+
+app.post('/reg', user.doReg);
 
 app.get('/getchatdata', chat.showData);
 

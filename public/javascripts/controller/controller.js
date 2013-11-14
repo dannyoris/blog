@@ -7,7 +7,8 @@ var MainCntl = function($scope, $route, $routeParams, $location) {
 
 
 
-var ChatDataControl = function($scope, $http){
+var ChatControl = function($scope, $http){
+
 
 	$http.get('/getchatdata').success(function(data){
 		$scope.chatlist = data;
@@ -35,4 +36,41 @@ var ChatDataControl = function($scope, $http){
 
 	connect();
 
+}
+
+
+
+var LoginControl = function($scope, $http){
+	$scope.login = function(user){
+		$http.post('/login',user).success(function(data){
+			if(data.success){
+				_Global.user = data.success;
+				$scope.$location.path('/');
+			}else{
+				$scope.error = data.error;
+			}
+		});
+	}
+}
+
+
+var RegControl = function($scope, $http){
+	$scope.reg = function(user){
+
+
+		if(user && user.username && user.password){
+			$http.post('/reg',user).success(function(data){
+				if(data.success){
+					_Global.user = data.success;
+					$scope.$location.path('/login');
+				}else{
+					$scope.error = data.error;
+				}
+			});
+		}else{
+			$scope.error = "账号或密码不能为空";
+			return;
+		}
+
+	}
 }

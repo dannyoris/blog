@@ -12,24 +12,26 @@ User.doLogout = function(req,res){
 }
 
 User.doLogin = function(req,res){
-	var username = req.body.username,
-		password = tool.md5(req.body.password);
+
+
+	var username = req.body['username'],
+		password = tool.md5(req.body['password']);
 
 	userModel.get({
 		username:username
 	},function(err,data){
 		if(err){
-			return res.render('login',{title:'',error:'账号或者密码错',user:null});
+			return res.json({error:'账号或者密码错'});
 		}
 		data = eval(data);
 		if(data==null){
-			return res.render('login',{title:'',error:'账号错',user:null});
+			return res.json({error:'账号错'});
 		}
 		if(data.password!=password){
-			return res.render('login',{title:'',error:'密码错',user:null});
+			return res.json({error:'密码错'});
 		}
 		req.session.user = username;
-		return res.redirect('/');
+		return res.json({success:username});
 	});
 }
 
@@ -44,16 +46,16 @@ User.doReg = function(req,res){
 
 	userModel.get({username:username},function(err,user){
 		if(err){
-			return res.redirect('/reg');
+			return res.json({error:err});
 		}
 		if(user){
-			return res.render('reg',{title:'',error:'重复',user:null});
+			return res.json({error:"重复"});
 		}
 		newUser.save(function(err){
 			if (err) {
-		        return res.redirect('/reg');
-		    }
-		    return res.redirect('/login');
+		        return res.json({error:err});
+		    }		    
+			return res.json({success:username});
 		});
 	});
 }
