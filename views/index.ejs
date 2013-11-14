@@ -1,5 +1,4 @@
 <%- include head %>
-<script src="/socket.io/socket.io.js"></script>
 <div class="container">
 <h1></h1>
 <div class="span3">
@@ -8,7 +7,7 @@
 <p><textarea width="500" height="200" id="Content"></textarea></p>
 <a class="btn btn-primary" onClick="send()">Send</a>
 <span>当前登录用户：</span>
-<span id="nowuser"></span>
+<span id="nowuser"><%=user%></span>
 </fieldset>
 </div>
 
@@ -19,42 +18,5 @@
 </div>
 
 </div>
-<script>
-var socket;
-var firstconnect = true;
-var date = new Date();
-var user = "<%=user%>";
-
-document.getElementById('nowuser').innerHTML = user;
- 
-function connect() {
-    if(firstconnect) {
-        socket = io.connect(null); 
-        socket.on('message', function(data){ message(data); });
-        firstconnect = false;
-    } else {
-        socket.socket.reconnect();
-    }
-}
- 
- 
-function message(data) {
-    var _old = document.getElementById('message').innerHTML;    
-    document.getElementById('message').innerHTML = '<li>'+data.username+' says:'+data.message+' at('+data.time+')</li>' + _old;
-}
- 
-function send() {
-    var val = document.getElementById('Content').value;
-    socket.send(user+"$-$-$"+val);
-}
-
-
-function getOld(){
-    var data = <%=chatdata%>;
-}
-
-connect();
-</script>
-
 
 <%- include foot %>

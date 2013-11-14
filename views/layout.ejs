@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="blog">
+<head>
+  <title>Angular & Socket.IO</title>
+  <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+  <link rel='stylesheet' href='/stylesheets/bootstrap-responsive.css' />
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script type="text/javascript" src="/javascripts/lib/jquery-1.7.js"></script>
+  <script type="text/javascript" src="/javascripts/lib/angular.js"></script>
+  <script type="text/javascript" src="/javascripts/app.js"></script>
+  <script type="text/javascript" src="/javascripts/controller/controller.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+var _Global = {
+  user:'<%=user%>'
+}
+</script>
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="brand" href="#">Project name</a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li><a href="/">Home</a></li>
+          <%if(user){%>
+          <li class="active"><a>Hello,<%=user%></a></li>
+          <li><a href="/logout">Logout</a></li>
+          <%}else{%>
+          <li><a href="/login">login</a></li>
+          <li><a href="/reg">register</a></li>
+          <%}%>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+<div class="container"  ng-controller="MainCntl" ng-view>
+
+</div>
+
+
+</body>
+</html>

@@ -9,9 +9,7 @@ IndexPage.showname = function(req,res){
 	if(req.session.user==null){
 		return res.redirect('/login');
 	}
-	chat.get({},function(err,data){
-		res.render('index',{title:'Blog',user:req.session.user,chatdata:data});
-	});
+	res.render('layout',{title:'Blog',user:req.session.user}); 
 }
 
 IndexPage.showLogin = function(req,res){

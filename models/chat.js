@@ -25,9 +25,9 @@ Chat.prototype.save = function(callback){
 				return callback(err);
 			}
 
-			collection.insert(info,{safe:true},function(err){
+			collection.insert(info,{safe:true},function(err,data){
 				mongodb.close();
-				callback(null,info.time.second);
+				callback(null,data);
 			});
 
 		});

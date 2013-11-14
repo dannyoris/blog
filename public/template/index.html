@@ -1,0 +1,18 @@
+
+<h1></h1>
+<div class="span3">
+<fieldset>
+<label>内容：</label>
+<p><textarea width="500" height="200" ng-model="messagecontent"></textarea></p>
+<a class="btn btn-primary" ng-click="send(messagecontent)">Send</a>
+<span>当前登录用户：</span>
+<span id="nowuser">{{user}}</span>
+</fieldset>
+</div>
+
+<div class="span6">
+    <ul class="unstyled" id="message-content">
+        <li ng-repeat="item in chatlist">{{item.username}} says:{{item.message}} at({{item.time.second}})</li>
+    </ul>
+</div>
+

@@ -7,7 +7,8 @@ var express = require('express'),
 	routes = require('./routes'),
 	user = require('./routes/user'),
 	index = require('./routes/index'),
-  socket = require('./common/socket'),
+	chat = require('./routes/chat'),
+  socket = require('./common/socket/socket'),
 	http = require('http'),
 	path = require('path'),
 	MongoStore = require('connect-mongo')(express),
@@ -46,14 +47,16 @@ if ('development' == app.get('env')) {
 //routes
 app.get('/', index.showname);
 app.get('/login', index.showLogin);
-app.get('/reg', index.showReg);
+app.post('/login', user.doLogin);
+/*app.get('/reg', index.showReg);
 
 app.get('/logout', user.doLogout);
-app.post('/login', user.doLogin);
-app.post('/reg', user.doReg);
+app.post('/reg', user.doReg);*/
 
+app.get('/getchatdata', chat.showData);
 
 server = http.createServer(app).listen(app.get('port'), function(){
+	console.log("server listening on port "+app.get('port'));
 });
 
 
