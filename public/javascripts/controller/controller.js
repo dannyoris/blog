@@ -9,6 +9,7 @@ var ChatControl = function($scope, $http){
 
 	$http.get('/getuser').success(function(user){
 		if(user && user.username){
+			_Global.user = user.username;
 			$scope.user = user.username;
 			$http.get('/getchatdata').success(function(data){
 				$scope.chatlist = data;
@@ -35,8 +36,15 @@ var ChatControl = function($scope, $http){
 	    }
 	}
 
-	$scope.send = function(mess){
-		socket.send(_Global.user+"$-$-$"+mess);
+	$scope.send = function(content){
+		if(content){			
+			$scope.isError = false;
+			$scope.content = "";
+			socket.send(_Global.user+"$-$-$"+content);
+		}else{
+			$scope.error = "请先输入内容";
+			$scope.isError = true;
+		}
 	}
 	connect();
 }
