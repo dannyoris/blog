@@ -5,14 +5,21 @@ var MainCntl = function($scope, $route, $routeParams, $location) {
 }
 
 
-
-
 var ChatControl = function($scope, $http){
 
-
-	$http.get('/getchatdata').success(function(data){
-		$scope.chatlist = data;
+	$http.get('/getuser').success(function(user){
+		if(user && user.username){
+			$scope.user = user.username;
+			$http.get('/getchatdata').success(function(data){
+				$scope.chatlist = data;
+			});
+		}else{
+			//$scope.$location.path('/login');
+			location.href = '/login';
+		}
 	});
+
+
 
 	var socket;
 	var firstconnect = true; 
@@ -31,21 +38,16 @@ var ChatControl = function($scope, $http){
 	$scope.send = function(mess){
 		socket.send(_Global.user+"$-$-$"+mess);
 	}
-
-	$scope.user = _Global.user;
-
 	connect();
-
 }
 
 
 
 var LoginControl = function($scope, $http){
-	$scope.submit = function(user){
+	$scope.login = function(user){
 		$http.post('/login',user).success(function(data){
 			if(data.success){
-				_Global.user = data.success;
-				$scope.$location.path('/');
+				$scope.$location.path('/home');
 			}else{
 				$scope.error = data.error;
 			}

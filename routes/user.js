@@ -6,9 +6,14 @@ var tool = require('../common/tool.js'),
 userModel = require('../models/user.js');
 var User = module.exports = exports = {}
 
+
+User.getUsername = function(req,res){
+	return res.json({username:req.session.user});
+}
+
 User.doLogout = function(req,res){	
 	req.session.user = null;
-	return res.redirect('/');
+	res.redirect('/home');
 }
 
 User.doLogin = function(req,res){

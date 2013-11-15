@@ -45,13 +45,16 @@ if ('development' == app.get('env')) {
 }
 
 //routes
-app.get('/', index.showname);
+app.get('/',index.render);
+app.get('/home', index.render);
+app.get('/reg', index.render);
+app.get('/login', index.render);
+
 app.post('/login', user.doLogin);
-app.get('/login', index.showLogin);
 app.get('/logout', user.doLogout);
-app.get('/reg', index.showReg);
 app.post('/reg', user.doReg);
 app.get('/getchatdata', chat.showData);
+app.get('/getuser', user.getUsername);
 
 server = http.createServer(app).listen(app.get('port'), function(){
 	console.log("server listening on port "+app.get('port'));

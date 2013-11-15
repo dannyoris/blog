@@ -1,3 +1,21 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="nav-collapse collapse">
+      <a class="brand" href="#">Project name</a>
+        <ul class="nav">
+          <li><a href="/reg">register</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+<div class="container">
 <div class="pt20">
 <form class="form-signin">
 <h2 class="form-signin-heading">Please sign in</h2>
@@ -6,6 +24,7 @@
 <label class="checkbox">
   {{error}}
 </label>
-<button class="btn btn-large btn-primary" ng-click="submit(user)">Sign in</button>
+<button class="btn btn-large btn-primary" ng-click="login(user)">Sign in</button>
 </form>
+</div>
 </div>
