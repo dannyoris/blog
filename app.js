@@ -50,10 +50,7 @@ app.post('/login', user.doLogin);
 app.get('/login', index.showLogin);
 app.get('/logout', user.doLogout);
 app.get('/reg', index.showReg);
-
-
 app.post('/reg', user.doReg);
-
 app.get('/getchatdata', chat.showData);
 
 server = http.createServer(app).listen(app.get('port'), function(){

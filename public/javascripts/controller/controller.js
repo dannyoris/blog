@@ -41,7 +41,7 @@ var ChatControl = function($scope, $http){
 
 
 var LoginControl = function($scope, $http){
-	$scope.login = function(user){
+	$scope.submit = function(user){
 		$http.post('/login',user).success(function(data){
 			if(data.success){
 				_Global.user = data.success;

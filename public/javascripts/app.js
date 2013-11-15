@@ -4,6 +4,6 @@ angular.module('blog', []).
       when('/', {templateUrl: '/template/index.html', controller: ChatControl}).
       when('/login', {templateUrl: '/template/login.html', controller: LoginControl}).
       when('/reg', {templateUrl: '/template/reg.html', controller: RegControl}).
-      otherwise({redirectTo: '/'});
+      otherwise({redirectTo: '/#/'});
     $locationProvider.html5Mode(true);
 }]);

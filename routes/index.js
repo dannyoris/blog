@@ -1,5 +1,3 @@
-
-var chat = require('../models/chat.js');
 /*
  * GET home page.
  */
