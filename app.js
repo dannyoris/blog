@@ -49,10 +49,13 @@ app.get('/',index.render);
 app.get('/home', index.render);
 app.get('/reg', index.render);
 app.get('/login', index.render);
+app.get('/post/add', index.renderPostAdd);
 
 app.post('/login', user.doLogin);
 app.get('/logout', user.doLogout);
 app.post('/reg', user.doReg);
+
+//data api
 app.get('/getchatdata', chat.showData);
 app.get('/getuser', user.getUsername);
 

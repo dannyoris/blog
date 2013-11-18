@@ -20,12 +20,13 @@
 <h1></h1>
 <div class="span3">
 <fieldset>
-<label>内容：</label>
-<p><textarea width="500" height="200" ng-model="content"></textarea></p>
-<a class="btn btn-primary" ng-click="send(content)">Send</a>
-<span>当前登录用户：</span>
-<span id="nowuser">{{user}}</span>
 
+<label>标题：</label>
+<input type="text" class="x-small" />
+
+<label>内容：</label>
+<p><textarea width="500" height="200" ng-model="content" name="content"></textarea></p>
+<a class="btn btn-primary" ng-click="send(content)">Send</a>
 </fieldset>
 <p></p>
 <div class="alert alert-error"  ng-show="isError">

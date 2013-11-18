@@ -66,8 +66,35 @@ var LoginControl = function($scope, $http){
 
 var RegControl = function($scope, $http){
 	$scope.reg = function(user){
+		if(user && user.username && user.password){
+			$http.post('/reg',user).success(function(data){
+				if(data.success){
+					_Global.user = data.success;
+					$scope.$location.path('/login');
+				}else{
+					$scope.error = data.error;
+				}
+			});
+		}else{
+			$scope.error = "账号或密码不能为空";
+			return;
+		}
+
+	}
+}
 
 
+
+
+var PostAddControl = function($scope, $http){
+	var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="content"]', {
+		  allowFileManager : true
+		});
+	});
+	
+	$scope.reg = function(user){
 		if(user && user.username && user.password){
 			$http.post('/reg',user).success(function(data){
 				if(data.success){

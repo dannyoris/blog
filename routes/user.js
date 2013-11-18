@@ -13,7 +13,7 @@ User.getUsername = function(req,res){
 
 User.doLogout = function(req,res){	
 	req.session.user = null;
-	res.redirect('/home');
+	res.redirect('/reg');
 }
 
 User.doLogin = function(req,res){
