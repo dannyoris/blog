@@ -6,6 +6,7 @@
 var express = require('express'),
 	routes = require('./routes'),
 	user = require('./routes/user'),
+	post = require('./routes/post'),
 	index = require('./routes/index'),
 	chat = require('./routes/chat'),
   socket = require('./common/socket/socket'),
@@ -49,8 +50,10 @@ app.get('/',index.render);
 app.get('/home', index.render);
 app.get('/reg', index.render);
 app.get('/login', index.render);
-app.get('/post/add', index.renderPostAdd);
+app.get('/post/add', post.render);
+app.get('/post/success', post.success);
 
+app.post('/post/add', post.doAdd);
 app.post('/login', user.doLogin);
 app.get('/logout', user.doLogout);
 app.post('/reg', user.doReg);

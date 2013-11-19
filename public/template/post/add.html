@@ -18,26 +18,23 @@
 </div>
 <div class="container">
 <h1></h1>
-<div class="span3">
+<div class="span8">
+
+<form action="/post/add" method="POST">
 <fieldset>
 
 <label>标题：</label>
-<input type="text" class="x-small" />
+<input type="text" class="x-small" ng-model="post.title" name="title" />
 
 <label>内容：</label>
-<p><textarea width="500" height="200" ng-model="content" name="content"></textarea></p>
-<a class="btn btn-primary" ng-click="send(content)">Send</a>
+<p><textarea class="input-xxxlarge" ng-model="post.content" name="content">2</textarea></p>
+<input class="btn btn-primary" type="submit" ng-click="send(post)" value="Send" />
 </fieldset>
+</form>
 <p></p>
 <div class="alert alert-error"  ng-show="isError">
 {{error}}
 </div>
-</div>
-
-<div class="span6">
-    <ul class="unstyled" id="message-content">
-        <li ng-repeat="item in chatlist">{{item.username}} says:{{item.message}} at({{item.time.second}})</li>
-    </ul>
 </div>
 
 </div>

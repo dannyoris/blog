@@ -87,27 +87,22 @@ var RegControl = function($scope, $http){
 
 
 var PostAddControl = function($scope, $http){
-	var editor;
-	KindEditor.ready(function(K) {
-		editor = K.create('textarea[name="content"]', {
+
+	$scope.init = function(){
+		KindEditor.create('textarea[name="content"]', {
 		  allowFileManager : true
 		});
-	});
-	
-	$scope.reg = function(user){
-		if(user && user.username && user.password){
-			$http.post('/reg',user).success(function(data){
-				if(data.success){
-					_Global.user = data.success;
-					$scope.$location.path('/login');
-				}else{
-					$scope.error = data.error;
-				}
-			});
-		}else{
-			$scope.error = "账号或密码不能为空";
-			return;
-		}
-
 	}
+
+	$scope.send = function(post){
+		console.log(post);
+		if(post && post.title && post.content){
+			
+		}else{
+			$scope.error = "标题和内容不能为空";
+			$scope.isError = true;
+			return false;
+		}
+	}
+	$scope.init();
 }

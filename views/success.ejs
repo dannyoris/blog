@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="blog">
+<head>
+  <title>Angular & Socket.IO</title>
+  <script type="text/javascript">var _Global = {};</script>
+  <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+  <link rel='stylesheet' href='/stylesheets/bootstrap-responsive.css' />
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body  ng-controller="MainCntl" ng-view>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="nav-collapse collapse">
+      <a class="brand" href="#">Project name</a>
+        <ul class="nav">
+          <li class="active"><a>Hello,{{user}}</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="hero-unit">
+    <h3>添加成功！</h3>
+    <p><span id="sec">5</span>秒后返回</p>
+    <script type="text/javascript">
+    var i = 4;
+    setInterval(function(){
+      document.getElementById('sec').innerHTML = i;
+      i--
+      if(i==-1){
+        location.href = '<%=redirect%>';
+      }
+    },1*1000);
+    </script>
+  </div>
+</div>
+
+</body>
+</html>
