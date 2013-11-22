@@ -1,0 +1,28 @@
+<ul class="nav">
+  <li class="active"><a href="#">Home</a></li>
+  <li><a href="#">Projects</a></li>
+  <li><a href="#">Services</a></li>
+  <li><a href="#">Downloads</a></li>
+  <li><a href="#">About</a></li>
+  <li><a href="#">Contact</a></li>
+</ul>
+
+<h1></h1>
+<div class="span8">
+
+<form action="/post/add" method="POST">
+<fieldset>
+
+<label>标题：</label>
+<input type="text" class="x-small" ng-model="post.title" name="title" />
+
+<label>内容：</label>
+<p><textarea class="input-xxxlarge" ng-model="post.content" name="content"></textarea></p>
+<input class="btn btn-primary" type="submit" ng-click="send(post)" value="Send" />
+</fieldset>
+</form>
+<p></p>
+<div class="alert alert-error"  ng-show="isError">
+{{error}}
+</div>
+</div>

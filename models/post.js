@@ -36,27 +36,29 @@ Post.prototype.save = function(callback){
 	});
 }
 
-//读取用户信息
-Post.get = function(post, callback) {
-  mongodb.open(function (err, db) {
-    if (err) {
+//读取信息
+Post.get = function(key,callback){
+
+  mongodb.open(function(err,db){
+    if(err){
       return callback(err);
     }
-
     db.collection('posts',function(err,collection){
-     
-      if (err) {
+      if(err){
         mongodb.close();
         return callback(err);
       }
 
-      collection.findOne({title:post.title}, function(err, post){
-        mongodb.close();
-        if (post) {
-          return callback(null, post);
-        }
-        callback(err);
-      });
+      collection.find(key)
+            .sort({time:-1})
+              .toArray(function(err,data){
+              mongodb.close();
+              if(err){
+                callback(err);
+              }   
+              callback(err,data);       
+              });
+
     });
   });
-};
+}
